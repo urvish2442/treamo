@@ -100,7 +100,10 @@ const ShiftCommisioning = () => {
         const damagedItems = orderItems.filter(
             (item) =>
                 (item?.isMissing || item?.isDamaged) &&
-                quantity - acceptedCount - quantity_refunded > 0,
+                (item?.quantity || 0) -
+                    (item?.acceptedCount || 0) -
+                    (item?.quantity_refunded || 0) >
+                    0,
         );
         if (damagedItems.length === 0) return;
         const items = damagedItems.map(
