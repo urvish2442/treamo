@@ -50,6 +50,8 @@ const QRScanner = forwardRef(function ChildQRScanner(
     useImperativeHandle(ref, () => ({
         startScan() {
             if (scanner.current) {
+                successExtractedData.current = "";
+                errorExtractedData.current = "";
                 scanner.current.start();
             }
         },
@@ -115,4 +117,3 @@ const QRScanner = forwardRef(function ChildQRScanner(
 });
 
 export default QRScanner;
-
