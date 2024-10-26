@@ -28,6 +28,7 @@ const initialState = {
     orders: [],
     currentOrderIndex: 0,
     bag_id: [],
+    indexChangeCount: 0,
 };
 
 const AuthSlice = createSlice({
@@ -73,10 +74,12 @@ const AuthSlice = createSlice({
             if (state.orders.length > 0) {
                 state.currentOrderIndex =
                     (state.currentOrderIndex + 1) % state.orders.length;
+                state.indexChangeCount = state.indexChangeCount + 1;
             }
         },
         resetNextCurrentOrderIndex: (state, { payload }) => {
             state.currentOrderIndex = 0;
+            state.indexChangeCount = 0;
             state.pickedOrders = state.orders;
             state.orders = [];
         },
@@ -141,6 +144,7 @@ const AuthSlice = createSlice({
                     ORDER_STATUS.PICKED;
                 if (state.currentOrderIndex < state.orders.length - 1) {
                     state.currentOrderIndex = state.currentOrderIndex + 1;
+                    state.indexChangeCount = state.indexChangeCount + 1;
                 }
             }
         },

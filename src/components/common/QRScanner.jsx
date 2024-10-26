@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import QrScanner from "qr-scanner";
+import { useTranslation } from "react-i18next";
 
 const QRScanner = ({
     onExtractData = () => {},
@@ -18,6 +19,7 @@ const QRScanner = ({
     const qrBoxEl = useRef(null);
     const successExtractedData = useRef("");
     const errorExtractedData = useRef("");
+    const {t} = useTranslation("common");
 
     // ** Effects
     useEffect(() => {

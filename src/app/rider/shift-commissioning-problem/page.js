@@ -27,7 +27,8 @@ import { encodeData } from "@/utils/jwt";
 import CompleteOrderButton from "@/components/rider/shiftCommissioning/CompleteOrderButton";
 const ShiftCommisioning = () => {
     const { t } = useTranslation();
-    const { orders, currentOrderIndex } = useSelector(authState);
+    const { orders, currentOrderIndex, indexChangeCount } =
+        useSelector(authState);
     const { push } = useRouter();
     const dispatch = useDispatch();
     const [isAllItemsAccepted, setIsAllItemsAccepted] = useState(false);
@@ -38,6 +39,7 @@ const ShiftCommisioning = () => {
         console.log("🚀 ~ ShiftCommisioning ~ orders:", {
             orders,
             currentOrderIndex,
+            indexChangeCount,
         });
         if (
             !orders.length > 0 ||
@@ -59,7 +61,7 @@ const ShiftCommisioning = () => {
             .map((item) => item?.product_id);
 
         setDamagedItems(damagedAndMissingProductIds);
-    }, [currentOrderIndex]);
+    }, [currentOrderIndex, indexChangeCount]);
 
     const checkAccepted = () => {
         if (!orders || !orders[currentOrderIndex]?.orderDetails?.items) return;
