@@ -95,11 +95,13 @@ const QRScanner = ({
                 />
             </div>
             <div className="qr-next-bottom">
-                {!reScan ? (
-                    <button onClick={handleNext}>Next</button>
-                ) : (
-                    <button onClick={handleReScan}>Re-Scan</button>
-                )}
+                <div className="qr-next-bottom-inner">
+                    {!reScan ? (
+                        <button onClick={handleNext}>Next</button>
+                    ) : (
+                        <button onClick={handleReScan}>Re-Scan</button>
+                    )}
+                </div>
             </div>
         </div>
     );
