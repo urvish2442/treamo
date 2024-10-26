@@ -209,6 +209,7 @@ const AuthSlice = createSlice({
                 currentOrder,
             ];
             state.orders = updatedOrders;
+            state.indexChangeCount = state.indexChangeCount + 1;
         },
     },
 
