@@ -7,6 +7,7 @@ const QRScanner = ({
     onExtractData = () => {},
     handleNext = () => {},
     reScan = false,
+    setReScan = () => {},
 }) => {
     // ** States
     const [qrOn, setQrOn] = useState(true);
@@ -67,6 +68,7 @@ const QRScanner = ({
     };
 
     const handleReScan = () => {
+        setReScan(false);
         successExtractedData.current = "";
         errorExtractedData.current = "";
         scanner.current.start();

@@ -64,6 +64,7 @@ const ScanBag = () => {
             onExtractData={onExtractData}
             handleNext={handleNext}
             reScan={reScan}
+            setReScan={setReScan}
         />
     );
 };
