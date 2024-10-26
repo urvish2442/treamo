@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+    color: #000;
+    background: #fff;
+    /* font-family: "Inter", sans-serif; */
+    font-family: var(--font-inter);
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+.full-block-link button {
+    display: flex;
+    align-items: center;
+}
+.full-block-link button span {
+    padding-left: 10px;
+}
+
+.qr-reader {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+}
+
+.qr-reader video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.qr-reader .qr-box {
+    width: 100% !important;
+    left: 0 !important;
+}
+
+.qr-reader .qr-frame {
+    position: absolute;
+    fill: none;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/* Media Queries for mobile screens */
+@media (max-width: 426px) {
+    .qr-reader {
+        width: 100%;
+    }
+}
+
+.ReactModal__Overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    z-index: 99;
+}
+
+.common-modal-block {
+    width: 95%;
+    height: auto;
+    border-radius: 24px;
+    background-color: #fff;
+    padding: 25px;
+}
+
+.common-modal-block .common-close-error-btn {
+    text-align: center;
+}
+.common-modal-block .common-close-error-btn h3 {
+    padding: 10px 0px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000;
+    font-weight: 500;
+}
+.common-modal-block .common-close-error-btn h2 {
+    padding: 10px 0px 25px;
+    font-size: 22px;
+    line-height: 26px;
+    color: #000;
+    font-weight: 500;
+}
+.common-modal-block .common-close-error-btn h3 a {
+    color: #d92d20;
+}
+.common-modal-block .button-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.common-modal-block .button-group .cancel-btn {
+    background-color: transparent;
+    border-radius: 12px;
+    border: 1px solid #f9c93c;
+    color: #f9c93c;
+    padding: 12px;
+    justify-content: center;
+    outline: none;
+    box-shadow: none;
+    font-size: 18px;
+    font-family: "Public Sans", sans-serif;
+    font-weight: 500;
+    margin: 0px 7px;
+}
+.common-modal-block .button-group .fill-btn {
+    background-color: #f9c93c;
+    border-radius: 12px;
+    padding: 12px;
+    justify-content: center;
+    outline: none;
+    box-shadow: none;
+    font-size: 18px;
+    color: #fff;
+    font-family: "Public Sans", sans-serif;
+    font-weight: 500;
+    margin: 0px 7px;
+}
+
+.two-block-modal-inner {
+    height: 100%;
+    display: flex;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.two-block-modal-inner-left {
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fdf3d6;
+    padding: 64px 32px 0px 32px;
+}
+
+.top-block-top h2 {
+    font-size: 40px;
+    line-height: 50px;
+    color: #f8b302;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.top-block-top p {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 500;
+    color: #f8b302;
+}
+
+.top-block-bottom img {
+    width: 100%;
+}
+
+.two-block-modal-inner-right {
+    width: 66.66%;
+    padding: 32px;
+}
+
+.btn-close-block {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.search-address {
+    margin-top: 25px;
+}
+
+.search-address h3 {
+    font-weight: 500;
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 12px;
+    line-height: 30px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.search-address .form-group {
+    position: relative;
+}
+
+.search-address .form-group input {
+    width: 100%;
+    height: 58px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 12px 12px 52px;
+    font-family: "Public Sans", sans-serif;
+    font-size: 13px;
+    outline: none;
+    box-shadow: none;
+    color: #64748b;
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.15);
+}
+
+.search-address .form-group input::placeholder {
+    color: #64748b;
+}
+
+.search-address .form-group input::-ms-input-placeholder {
+    color: #64748b;
+}
+
+.search-address .form-group button {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+.full-position-re {
+    position: relative;
+}
+.full-position-re .qr-next-bottom {
+    position: fixed;
+    bottom: 22px;
+    left: 0px;
+    right: 0px;
+    padding: 0px 16px;
+}
+.qr-next-bottom-inner {
+    border-radius: 12px;
+    box-shadow: 0px -4px 130px 0px rgba(0, 0, 0);
+    background-color: #202020;
+    padding: 32px 16px;
+}
+.qr-next-bottom-inner button {
+    background-color: #f9c93c;
+    border-radius: 12px;
+    padding: 13px 12px;
+    justify-content: center;
+    outline: none;
+    box-shadow: none;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+}
+
+.gm-style .gm-style-iw {
+    padding: 0px !important;
+}
+
+.gm-style-iw .gm-style-iw-d {
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.rider-location-tooltip-block {
+    display: flex;
+    position: relative;
+}
+ .rider-location-tooltip-block .icon-cy {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #f9c93c;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.rider-location-text {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 35px;
+}
+.rider-location-text p {
+    color: #64748b;
+    font-size: 10px;
+    line-height: 14px;
+}
+.rider-location-text img {
+    width: 17px;
+}

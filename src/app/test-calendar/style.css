@@ -1,0 +1,9 @@
+.DayPicker-Day--closed {
+  background-color: yellow;
+  color: rgb(255, 255, 255);
+}
+
+.DayPicker-Day--weekend {
+  background-color: green;
+  color: purple;
+}
