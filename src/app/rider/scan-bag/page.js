@@ -2,6 +2,7 @@
 import QRScanner from "@/components/common/QRScanner";
 import { authState, updateOrderBagId } from "@/redux/Auth/AuthSlice";
 import { PATH_DASHBOARD } from "@/routes/paths";
+import { encodeData } from "@/utils/jwt";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
