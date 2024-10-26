@@ -68,6 +68,7 @@ const ShiftCommisioning = () => {
         if (!orders[currentOrderIndex]?.order_id) return;
         if (!orders[currentOrderIndex]?.orderDetails) {
             getOrderDetails(orders[currentOrderIndex]?.order_id);
+            return;
         }
         const currentOrder = orders[currentOrderIndex];
         if (currentOrder?.isDelivered || currentOrder?.isPicked) {
