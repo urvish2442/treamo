@@ -22,6 +22,7 @@ const QRScanner = forwardRef(function ChildQRScanner(
     const videoEl = useRef(null);
     const qrBoxEl = useRef(null);
     const successExtractedData = useRef("");
+    const errorExtractedData = useRef("");
     const { t } = useTranslation("common");
 
     // ** Effects
