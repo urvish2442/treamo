@@ -21,6 +21,7 @@ const QRScanner = forwardRef(function ChildQRScanner(
     const scanner = useRef();
     const videoEl = useRef(null);
     const qrBoxEl = useRef(null);
+    const successExtractedData = useRef("");
     const { t } = useTranslation("common");
 
     // ** Effects
@@ -60,21 +61,25 @@ const QRScanner = forwardRef(function ChildQRScanner(
 
     // ** Handlers
     const onScanSuccess = (result) => {
-        if (result?.data) {
+        if (result?.data && successExtractedData.current === "") {
+            successExtractedData.current = result?.data;
             onExtractData({
                 status: true,
-                data: result.data,
+                data: successExtractedData.current,
                 error: null,
             });
         }
     };
 
     const onScanFail = (err) => {
-        onExtractData({
-            status: false,
-            data: null,
-            error: err,
-        });
+        if (errorExtractedData.current === "") {
+            errorExtractedData.current = null;
+            onExtractData({
+                status: false,
+                data: errorExtractedData.current,
+                error: err,
+            });
+        }
     };
 
     if (!qrOn) {
@@ -109,3 +114,4 @@ const QRScanner = forwardRef(function ChildQRScanner(
 });
 
 export default QRScanner;
+
