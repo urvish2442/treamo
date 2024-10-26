@@ -1,19 +1,13 @@
 "use client";
 
-import {
-    forwardRef,
-    useEffect,
-    useImperativeHandle,
-    useRef,
-    useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import QrScanner from "qr-scanner";
-import { useTranslation } from "react-i18next";
 
-const QRScanner = forwardRef(function ChildQRScanner(
-    { onExtractData = () => {}, handleNext = () => {} },
-    ref,
-) {
+const QRScanner = ({
+    onExtractData = () => {},
+    handleNext = () => {},
+    reScan = false,
+}) => {
     // ** States
     const [qrOn, setQrOn] = useState(true);
 
@@ -23,44 +17,31 @@ const QRScanner = forwardRef(function ChildQRScanner(
     const qrBoxEl = useRef(null);
     const successExtractedData = useRef("");
     const errorExtractedData = useRef("");
-    const { t } = useTranslation("common");
 
     // ** Effects
     useEffect(() => {
         if (videoEl?.current && !scanner.current) {
-            scanner.current = new QrScanner(videoEl.current, onScanSuccess, {
+            scanner.current = new QrScanner(videoEl?.current, onScanSuccess, {
                 onDecodeError: onScanFail,
                 preferredCamera: "environment",
                 highlightScanRegion: true,
                 highlightCodeOutline: true,
-                overlay: qrBoxEl.current || undefined,
+                overlay: qrBoxEl?.current || undefined,
             });
 
-            scanner.current
-                .start()
+            scanner?.current
+                ?.start()
                 .then(() => setQrOn(true))
-                .catch(() => setQrOn(false));
+                .catch((err) => {
+                    if (err) setQrOn(false);
+                });
         }
 
         return () => {
-            if (scanner.current) scanner.current.stop();
+            if (!videoEl?.current) scanner?.current?.stop();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    useImperativeHandle(ref, () => ({
-        startScan() {
-            if (scanner.current) {
-                successExtractedData.current = "";
-                errorExtractedData.current = "";
-                scanner.current.start();
-            }
-        },
-        stopScan() {
-            if (scanner.current) {
-                scanner.current.stop();
-            }
-        },
-    }));
 
     // ** Handlers
     const onScanSuccess = (result) => {
@@ -83,6 +64,12 @@ const QRScanner = forwardRef(function ChildQRScanner(
                 error: err,
             });
         }
+    };
+
+    const handleReScan = () => {
+        successExtractedData.current = "";
+        errorExtractedData.current = "";
+        scanner.current.start();
     };
 
     if (!qrOn) {
@@ -108,12 +95,14 @@ const QRScanner = forwardRef(function ChildQRScanner(
                 />
             </div>
             <div className="qr-next-bottom">
-                <div className="qr-next-bottom-inner">
+                {!reScan ? (
                     <button onClick={handleNext}>Next</button>
-                </div>
+                ) : (
+                    <button onClick={handleReScan}>Re-Scan</button>
+                )}
             </div>
         </div>
     );
-});
+};
 
 export default QRScanner;

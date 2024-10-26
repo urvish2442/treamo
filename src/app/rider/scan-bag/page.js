@@ -15,9 +15,7 @@ const ScanBag = () => {
     const { orders } = useSelector(authState);
     const { push } = useRouter();
     const [code, setCode] = useState("");
-
-    // ** Hooks
-    const qrHandlerRef = useRef(null);
+    const [reScan, setReScan] = useState(false);
 
     // ** Effects
     useEffect(() => {
@@ -32,19 +30,16 @@ const ScanBag = () => {
                 const isValidBagId = /^bag_/.test(scannedBagId);
 
                 if (!isValidBagId) {
-                    if (qrHandlerRef.current) {
-                        qrHandlerRef.current.startScan();
-                    }
+                    setReScan(true);
                     return toast.error(t("BagIdIsInvalid"));
                 }
                 if (bag_id?.includes(scannedBagId)) {
-                    if (qrHandlerRef.current) {
-                        qrHandlerRef.current.startScan();
-                    }
+                    setReScan(true);
                     return toast.error(t("BagAlreadyScanned"));
                 }
                 dispatch(updateOrderBagId({ bag_id: scannedBagId }));
                 setCode(scannedBagId);
+                setReScan(false);
                 toast.success(t("BagScannedSuccessfully"));
             }
 
@@ -68,7 +63,7 @@ const ScanBag = () => {
         <QRScanner
             onExtractData={onExtractData}
             handleNext={handleNext}
-            ref={qrHandlerRef}
+            reScan={reScan}
         />
     );
 };
