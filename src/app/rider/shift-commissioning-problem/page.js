@@ -98,7 +98,9 @@ const ShiftCommisioning = () => {
         const { items: orderItems } = currentOrder?.orderDetails || {};
         if (!orderItems) return;
         const damagedItems = orderItems.filter(
-            (item) => item?.isMissing || item?.isDamaged,
+            (item) =>
+                (item?.isMissing || item?.isDamaged) &&
+                quantity - acceptedCount - quantity_refunded > 0,
         );
         if (damagedItems.length === 0) return;
         const items = damagedItems.map(
